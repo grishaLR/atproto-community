@@ -1,0 +1,194 @@
+/* ============================================
+   Theme: <name>
+   Mood: <one-line vibe — what's the feel?>
+   Source: <link to inspiration / brand guide / aesthetic ref>
+
+   Applied via <html data-theme="<name>">.
+
+   ⚠ READ THE README FIRST — see the "Contributing a theme"
+   section in /README.md for the full process, layering rules,
+   contrast requirements, and gotchas.
+
+   Quick recap (don't skip step 3 — your theme won't load
+   anywhere without registering it):
+     1. Copy this file → src/styles/themes/<name>.css
+     2. Replace every REPLACE_ME with your theme id
+     3. REGISTER:
+        a. Add `@import "./themes/<name>.css";` to tokens.base.css
+        b. Add an entry to `themes` in src/lib/themes.ts
+     4. Run `npm run dev` and cycle to it via the header toggle.
+   ============================================ */
+
+:root[data-theme="REPLACE_ME"] {
+  /* ============================================================
+     1. BASE TOKENS — required.
+     Plain colors only (hex / rgb / oklch). No var() chains.
+     ============================================================ */
+
+  /* Surface ramp + paired content.
+     Light themes: 100 = page bg, ramps up to darker shades.
+     Dark themes:  100 = page bg (darkest), ramps UP in lightness
+                   with elevation (cards/borders are lighter). */
+  --color-base-100: #ffffff;
+  --color-base-200: #f4f4f5;
+  --color-base-300: #e4e4e7;
+  --color-base-content: #1a1a1a;
+
+  /* Brand pairs — every `*-content` MUST hit ≥4.5:1
+     contrast on its paired surface. */
+  --color-primary: #5b6cff;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #8b5cf6;
+  --color-secondary-content: #ffffff;
+
+  --color-accent: #f59e0b;
+  --color-accent-content: #1a1a1a;
+
+  --color-neutral: #52525b;
+  --color-neutral-content: #ffffff;
+
+  /* Status pairs */
+  --color-info: #3b82f6;
+  --color-info-content: #ffffff;
+
+  --color-success: #16a34a;
+  --color-success-content: #ffffff;
+
+  --color-warning: #f59e0b;
+  --color-warning-content: #1a1a1a;
+
+  --color-error: #dc2626;
+  --color-error-content: #ffffff;
+
+  /* ============================================================
+     2. FONTS — optional.
+     Themes MAY override --font-display and --font-body.
+     This is a deliberate carve-out from "no structural theming"
+     because vibe often hinges on type. Don't override --space-*,
+     --text-* sizes, --leading-*, breakpoints, or motion durations.
+     ============================================================ */
+  /* --font-display: "Your Display Font", Georgia, serif; */
+  /* --font-body:    "Your Body Font", system-ui, sans-serif; */
+
+  /* ============================================================
+     3. COMPONENT OVERRIDES — optional.
+     Each line below overrides a default from tokens.components.css.
+     Delete the ones you don't change. Add as needed.
+     ============================================================ */
+
+  /* --- Card --- */
+  /* --card: var(--color-base-100); */
+  /* --card-radius: 10px; */
+  /* --card-border: var(--color-base-300); */
+  /* --card-border-width: 1px; */
+  /* --card-border-style: solid; */
+  /* --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); */
+
+  /* --- Pills (badges, community pills, theme toggle) --- */
+  /* --pill-radius: 999px; */    /* set to 0 for retro / square themes */
+  /* --avatar-radius: 50%; */    /* avatar circles inside community pills */
+
+  /* --- Buttons --- */
+  /* --btn-radius: 6px; */
+  /* --btn-primary-bg: var(--primary); */
+  /* --btn-primary-bg-hover: var(--primary-hover); */
+  /* --btn-primary-fg: var(--primary-foreground); */
+  /* --btn-primary-border-style: none; */
+  /* --btn-primary-border-width: 0; */
+  /* --btn-primary-border-color: transparent; */
+  /* --btn-primary-text-transform: none; */
+  /* --btn-primary-animation: none; */
+  /* --btn-primary-shadow: none; */
+  /* --btn-primary-shadow-hover: none; */
+  /* --btn-primary-shadow-active: none; */
+  /* --btn-primary-translate-hover: 0; */
+  /* --btn-primary-translate-active: 0; */
+  /* --btn-ghost-border: var(--border); */
+  /* --btn-ghost-bg-hover: var(--primary-muted); */
+  /* --btn-ghost-border-hover: ...; */
+
+  /* --- Header --- */
+  /* --header-bg: var(--card); */
+  /* --header-border: var(--border); */
+  /* --header-fg: var(--foreground); */
+  /* --header-fg-muted: var(--foreground-muted); */
+  /* --header-link: var(--primary); */
+  /* --header-link-hover-bg: ...; */
+  /* --header-link-inactive: ...; */
+
+  /* --- Footer --- */
+  /* --footer-bg: var(--muted); */
+  /* --footer-border: var(--border); */
+  /* --footer-fg-muted: var(--foreground-muted); */
+
+  /* --- Hero --- */
+  /* --hero-bg: var(--primary); */              /* solid, gradient, or url() ok */
+  /* --hero-fg: var(--primary-foreground); */
+  /* --hero-fg-muted: ...; */
+  /* --hero-title: ...; */
+  /* --hero-title-shadow: none; */
+  /* --hero-title-style: normal; */
+  /* --hero-subtitle: ...; */
+  /* --hero-border-style: none; */
+  /* --hero-border-width: 0; */
+  /* --hero-border-color: transparent; */
+  /* --hero-cta-bg: ...; */
+  /* --hero-cta-fg: ...; */
+  /* --hero-cta-border: none; */
+  /* --hero-cta-animation: none; */
+  /* --hero-cloud-display: block; */            /* "none" hides the floating clouds */
+
+  /* --- Badges --- */
+  /* --badge-tag-bg: var(--primary-muted); */
+  /* --badge-tag-fg: var(--primary-muted-foreground); */
+  /* --badge-online-bg: var(--primary-muted); */
+  /* --badge-online-fg: var(--primary-muted-foreground); */
+  /* --badge-location-bg: var(--success-muted); */
+  /* --badge-location-fg: var(--success-muted-foreground); */
+}
+
+/* ============================================================
+   4. THEME-SCOPED RAW CSS — optional, last resort.
+   For patterns that can't be expressed via tokens — animated
+   backgrounds, body overlays, decorative pseudo-elements.
+   Always scope to :root[data-theme="<name>"] so other themes
+   are unaffected.
+   ============================================================ */
+
+/* Example: full-page gradient background + faint grid overlay
+   (uncomment and adapt)
+:root[data-theme="REPLACE_ME"] body {
+  background: linear-gradient(180deg, #abc 0%, #fed 100%);
+  background-attachment: fixed;
+  position: relative;
+  isolation: isolate;
+}
+
+:root[data-theme="REPLACE_ME"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, white 1px, transparent 1px),
+    linear-gradient(to bottom, white 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+:root[data-theme="REPLACE_ME"] body > *:not(.skip-link) {
+  position: relative;
+  z-index: 1;
+}
+*/
+
+/* Always honor reduced motion if your theme animates anything.
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme="REPLACE_ME"] {
+    --btn-primary-animation: none;
+    --btn-primary-translate-hover: 0;
+  }
+}
+*/

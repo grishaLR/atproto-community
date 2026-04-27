@@ -51,7 +51,7 @@ const sourceLabel = source ? `@${source.replace(/\.bsky\.social$/, '')}` : undef
     transition: border-color 0.15s ease;
   }
   .event-card:hover {
-    border-color: var(--blue-300);
+    border-color: var(--card-border-hover);
   }
 
   .event-card__link {
@@ -63,7 +63,7 @@ const sourceLabel = source ? `@${source.replace(/\.bsky\.social$/, '')}` : undef
   .event-card__date {
     font-size: var(--text-xs);
     font-weight: 600;
-    color: var(--color-primary);
+    color: var(--primary);
     text-transform: uppercase;
     letter-spacing: 0.03em;
   }
@@ -72,14 +72,14 @@ const sourceLabel = source ? `@${source.replace(/\.bsky\.social$/, '')}` : undef
     font-family: var(--font-body);
     font-weight: 600;
     font-size: var(--text-sm);
-    color: var(--neutral-900);
+    color: var(--card-foreground);
     margin-top: var(--space-xs);
     line-height: var(--leading-tight);
   }
 
   .event-card__desc {
     font-size: var(--text-xs);
-    color: var(--color-text-muted);
+    color: var(--foreground-muted);
     margin-top: var(--space-sm);
     display: -webkit-box;
     -webkit-line-clamp: 2;

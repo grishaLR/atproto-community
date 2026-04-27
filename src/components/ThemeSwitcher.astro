@@ -1,0 +1,104 @@
+---
+import { themes, defaultThemeId, storageKey } from '../lib/themes';
+
+const themeIds = themes.map(t => t.id);
+const themeLabels = Object.fromEntries(themes.map(t => [t.id, t.name]));
+---
+
+<button
+  type="button"
+  class="theme-toggle"
+  data-theme-toggle
+  data-themes={JSON.stringify(themeIds)}
+  data-labels={JSON.stringify(themeLabels)}
+  data-default={defaultThemeId}
+  data-storage-key={storageKey}
+  aria-label="Cycle theme"
+>
+  <svg class="theme-toggle__icon" width="14" height="14" viewBox="0 0 24 24"
+       fill="none" stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+    <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+    <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+    <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
+  </svg>
+  <span class="theme-toggle__label" data-theme-label></span>
+</button>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  if (btn) {
+    const themes: string[] = JSON.parse(btn.dataset.themes ?? '[]');
+    const labels: Record<string, string> = JSON.parse(btn.dataset.labels ?? '{}');
+    const fallback = btn.dataset.default ?? themes[0];
+    const key = btn.dataset.storageKey ?? 'atc-theme';
+    const labelEl = btn.querySelector<HTMLElement>('[data-theme-label]');
+
+    const sync = () => {
+      const current = document.documentElement.dataset.theme || fallback;
+      if (labelEl) labelEl.textContent = labels[current] ?? current;
+      btn.setAttribute('aria-label', `Theme: ${labels[current] ?? current}. Click to switch.`);
+    };
+    sync();
+
+    btn.addEventListener('click', () => {
+      const current = document.documentElement.dataset.theme || fallback;
+      const idx = themes.indexOf(current);
+      const next = themes[(idx + 1) % themes.length];
+      if (next === fallback) {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.dataset.theme = next;
+      }
+      try {
+        localStorage.setItem(key, next);
+      } catch {
+        /* storage unavailable — ignore */
+      }
+      sync();
+    });
+  }
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    height: 28px;
+    padding: 0 var(--space-sm);
+    background: transparent;
+    color: var(--header-fg-muted);
+    border: 1px solid var(--header-border);
+    border-radius: var(--pill-radius);
+    font-family: inherit;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .theme-toggle:hover {
+    color: var(--header-fg);
+    background: var(--header-link-hover-bg);
+    border-color: color-mix(in oklch, var(--header-fg) 30%, transparent);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .theme-toggle__icon {
+    flex-shrink: 0;
+  }
+
+  /* Hide label on very narrow screens; icon-only there */
+  @media (max-width: 480px) {
+    .theme-toggle__label {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,146 @@
+/* ============================================
+   Theme: ngerakines
+   Mood: Y2K / GeoCities — ridge borders, Comic Sans,
+         flashing buttons, blinding primaries.
+         Ported from atmosphereconf.
+
+   Applied via <html data-theme="ngerakines">.
+
+   Note: this theme overrides --font-* tokens.
+   The structural-tokens-aren't-themed rule has a carve-out
+   for fonts: a theme's whole vibe often hinges on type.
+   Spacing, sizes, breakpoints, and motion durations
+   remain off-limits for themes.
+   ============================================ */
+
+:root[data-theme="ngerakines"] {
+  /* --- Base tokens --- */
+  /* Surface ramp: lavender page, butter-yellow card surface, ddd separator */
+  --color-base-100: #ccccff; /* page */
+  --color-base-200: #ddddee; /* muted */
+  --color-base-300: #800080; /* "border" base — purple */
+  --color-base-content: #000000;
+
+  /* Brand: red primary, butter secondary, magenta accent */
+  --color-primary: #cc0000;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #ffffcc;
+  --color-secondary-content: #000000;
+
+  --color-accent: #ff00ff;
+  --color-accent-content: #ffffff;
+
+  --color-neutral: #555555;
+  --color-neutral-content: #ffffff;
+
+  /* Status — flat web-safe primaries */
+  --color-info: #0000ff;
+  --color-info-content: #ffffff;
+
+  --color-success: #008800;
+  --color-success-content: #ffff00;
+
+  --color-warning: #ffcc00;
+  --color-warning-content: #000080;
+
+  --color-error: #ff0000;
+  --color-error-content: #ffff00;
+
+  /* --- Font overrides (vibe-defining) --- */
+  --font-display: "Comic Sans MS", "Comic Sans", "Chalkboard SE", cursive;
+  --font-body: "Comic Sans MS", "Comic Sans", "Chalkboard SE", cursive;
+
+  /* --- Pills & avatars go square in this theme --- */
+  --pill-radius: 0;
+  --avatar-radius: 0;
+
+  /* --- Card: square, ridge border, butter background --- */
+  --card: #ffffcc;
+  --card-radius: 0;
+  --card-border: #800080;
+  --card-border-width: 3px;
+  --card-border-style: ridge;
+  --card-border-hover: #ff00ff;
+  --card-shadow: none;
+
+  /* --- Button: square with outset bevel --- */
+  --btn-radius: 0;
+  --btn-primary-border-style: outset;
+  --btn-primary-border-width: 3px;
+  --btn-primary-border-color: #ff6666;
+  --btn-primary-text-transform: uppercase;
+  --btn-primary-animation: ngerakines-flash 1s infinite;
+
+  /* --- Header: navy bg, lime + yellow text, red border --- */
+  --header-bg: #000080;
+  --header-fg: #00ff00;
+  --header-fg-muted: #ffff00;
+  --header-border: #ff0000;
+  --header-link: #ffff00;
+  --header-link-hover-bg: rgba(255, 255, 0, 0.15);
+  --header-link-inactive: #00ff00;
+
+  /* --- Footer: bright yellow, purple text --- */
+  --footer-bg: #ffff00;
+  --footer-border: #800080;
+  --footer-fg-muted: #800080;
+
+  /* --- Hero: black bg, neon green text, red dashed border --- */
+  --hero-bg: #000000;
+  --hero-fg: #00ff00;
+  --hero-fg-muted: #ffff00;
+  --hero-title: #ff0000;
+  --hero-title-shadow: 3px 3px 0 #ffff00;
+  --hero-title-style: italic;
+  --hero-subtitle: #00cccc;
+  --hero-border-style: dashed;
+  --hero-border-width: 5px;
+  --hero-border-color: #ff0000;
+  --hero-cloud-display: none;
+  --hero-cta-bg: #cc0000;
+  --hero-cta-fg: #ffff00;
+  --hero-cta-border: 3px outset #ff6666;
+  --hero-cta-animation: ngerakines-flash 1s infinite;
+
+  /* --- Badges: flat ngerakines colors --- */
+  --badge-tag-bg: #ccccff;
+  --badge-tag-fg: #000080;
+  --badge-online-bg: #ccffff;
+  --badge-online-fg: #006666;
+  --badge-location-bg: #ccffcc;
+  --badge-location-fg: #006600;
+
+  /* Ghost button on red bg looks unhinged — keep readable */
+  --btn-ghost-border: #ffff00;
+  --btn-ghost-bg-hover: rgba(255, 255, 0, 0.15);
+  --btn-ghost-border-hover: #ffffff;
+}
+
+/* Flashing button — drives both --btn-primary and --hero-cta */
+@keyframes ngerakines-flash {
+  0%,
+  100% {
+    background: #cc0000;
+    color: #ffff00;
+  }
+  50% {
+    background: #ffff00;
+    color: #cc0000;
+  }
+}
+
+/* The site uses card hover by changing border-color only;
+   in ridge-border land that looks broken — bump width on hover. */
+:root[data-theme="ngerakines"] .post-card:hover,
+:root[data-theme="ngerakines"] .event-card:hover {
+  border-color: #ff00ff;
+}
+
+/* Respect reduced-motion: kill the flash */
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme="ngerakines"] {
+    --btn-primary-animation: none;
+    --hero-cta-animation: none;
+  }
+}

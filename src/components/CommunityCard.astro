@@ -53,9 +53,9 @@ function handleColor(h: string): string {
     display: inline-flex;
     align-items: center;
     gap: var(--space-sm);
-    background: var(--color-surface-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-pill);
+    background: var(--card);
+    border: var(--card-border-width) var(--card-border-style) var(--card-border);
+    border-radius: var(--pill-radius);
     padding: var(--space-xs) var(--space-md) var(--space-xs) var(--space-xs);
   }
 
@@ -63,7 +63,7 @@ function handleColor(h: string): string {
     flex-shrink: 0;
     width: 28px;
     height: 28px;
-    border-radius: 50%;
+    border-radius: var(--avatar-radius);
     object-fit: cover;
   }
 
@@ -71,7 +71,7 @@ function handleColor(h: string): string {
     flex-shrink: 0;
     width: 28px;
     height: 28px;
-    border-radius: 50%;
+    border-radius: var(--avatar-radius);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -91,25 +91,25 @@ function handleColor(h: string): string {
   .community-pill__name {
     font-size: var(--text-xs);
     font-weight: 600;
-    color: var(--neutral-900);
+    color: var(--card-foreground);
     line-height: 1.2;
     white-space: nowrap;
   }
 
   .community-pill__location {
     font-size: 9px;
-    color: var(--color-text-muted);
+    color: var(--foreground-muted);
     line-height: 1.2;
   }
 
   .community-pill__link {
     flex-shrink: 0;
-    color: var(--color-primary);
+    color: var(--primary);
     display: flex;
     padding: var(--space-xs);
     margin: calc(-1 * var(--space-xs));
   }
   .community-pill__link:hover {
-    color: var(--color-primary-hover);
+    color: var(--primary-hover);
   }
 </style>

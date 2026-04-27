@@ -1,0 +1,173 @@
+/* ============================================
+   Theme: fujocoded
+   Source: fujocoded.com (ported from atmosphereconf)
+
+   Vibe ingredients (in order of importance):
+   1. Lavender → blush body gradient with a faint white grid
+   2. Glass navbar (translucent + backdrop-blur)
+   3. Signature 3D primary button — gradient + inset
+      highlights + outer drop, lifts on hover
+   4. White cards on the gradient
+
+   Applied via <html data-theme="fujocoded">.
+   ============================================ */
+
+:root[data-theme="fujocoded"] {
+  /* --- Base tokens --- */
+  --color-base-100: #b89ffc; /* lavender (page accent below the gradient) */
+  --color-base-200: #ffffff; /* card surface */
+  --color-base-300: #4d2e91; /* deep purple — strokes/borders */
+  --color-base-content: #4d2e91; /* deep purple body text */
+
+  /* Brand: hot pink primary, deep purple secondary, magenta accent */
+  --color-primary: #ff38eb;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #4d2e91;
+  --color-secondary-content: #ffffff;
+
+  --color-accent: #ce00ff;
+  --color-accent-content: #ffffff;
+
+  --color-neutral: #7a5fbd;
+  --color-neutral-content: #ffffff;
+
+  /* Status — pulled from fujocoded event-badge palette */
+  --color-info: #4360f7;
+  --color-info-content: #ffffff;
+
+  --color-success: #3da828;
+  --color-success-content: #ffffff;
+
+  --color-warning: #b88a00;
+  --color-warning-content: #ffffff;
+
+  --color-error: #d45200;
+  --color-error-content: #ffffff;
+
+  /* --- Component overrides --- */
+
+  /* Cards: soft purple shadow, gentle 8px radius */
+  --card: rgba(255, 255, 255, 0.85);
+  --card-radius: 8px;
+  --card-border-width: 0;
+  --card-border-style: solid;
+  --card-shadow:
+    0 10px 22px rgba(77, 46, 145, 0.16),
+    0 3px 8px rgba(42, 26, 76, 0.1);
+
+  /* Header: glass — translucent white + backdrop-blur (set below) */
+  --header-bg: rgba(255, 255, 255, 0.55);
+  --header-border: transparent;
+  --header-fg: #4d2e91;
+  --header-fg-muted: rgba(77, 46, 145, 0.6);
+  --header-link: #ff38eb;
+  --header-link-hover-bg: rgba(255, 56, 235, 0.12);
+  --header-link-inactive: rgba(77, 46, 145, 0.5);
+
+  /* Footer: also glass */
+  --footer-bg: rgba(255, 255, 255, 0.5);
+  --footer-border: rgba(77, 46, 145, 0.15);
+  --footer-fg-muted: rgba(77, 46, 145, 0.7);
+
+  /* Hero: white card on the gradient with a strong purple drop */
+  --hero-bg: rgba(255, 255, 255, 0.85);
+  --hero-fg: #4d2e91;
+  --hero-fg-muted: rgba(77, 46, 145, 0.7);
+  --hero-title: #4d2e91;
+  --hero-subtitle: rgba(77, 46, 145, 0.75);
+  --hero-cta-bg: linear-gradient(to bottom, #ce00ff, #a700cf);
+  --hero-cta-fg: #ffffff;
+  --hero-cta-border: none;
+  --hero-cloud-display: none;
+
+  /* Signature 3D primary button — gradient + inset highlight + outer drop */
+  --btn-primary-bg: linear-gradient(to bottom, #ce00ff, #a700cf);
+  --btn-primary-bg-hover: linear-gradient(to bottom, #ce00ff, #a700cf);
+  --btn-primary-fg: #ffffff;
+  --btn-radius: 12px;
+  --btn-primary-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.45),
+    inset 0 -1px 2px rgba(130, 0, 160, 0.4),
+    0 2px 4px rgba(167, 0, 207, 0.3);
+  --btn-primary-shadow-hover:
+    inset 0 1px 1px rgba(255, 255, 255, 0.5),
+    inset 0 -1px 2px rgba(130, 0, 160, 0.35),
+    0 3px 10px rgba(255, 56, 235, 0.25);
+  --btn-primary-shadow-active:
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    inset 0 -1px 1px rgba(130, 0, 160, 0.2),
+    0 1px 2px rgba(206, 0, 255, 0.2);
+  --btn-primary-translate-hover: -1px;
+  --btn-primary-translate-active: 1px;
+
+  /* Pills: keep round but stronger borders */
+  --pill-radius: 999px;
+
+  /* Badges */
+  --badge-tag-bg: rgba(255, 56, 235, 0.18);
+  --badge-tag-fg: #a80098;
+  --badge-online-bg: rgba(67, 96, 247, 0.18);
+  --badge-online-fg: #2d3fb0;
+  --badge-location-bg: rgba(167, 255, 144, 0.3);
+  --badge-location-fg: #2d7a1a;
+}
+
+/* --- Body: lavender → blush gradient + faint white grid overlay --- */
+:root[data-theme="fujocoded"] body {
+  background: linear-gradient(180deg, #9687fa 0%, #fbb8fe 100%);
+  background-attachment: fixed;
+  position: relative;
+  isolation: isolate;
+}
+
+:root[data-theme="fujocoded"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, white 1px, transparent 1px),
+    linear-gradient(to bottom, white 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+:root[data-theme="fujocoded"] body > *:not(.skip-link) {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Glass navbar --- */
+:root[data-theme="fujocoded"] .site-header {
+  backdrop-filter: blur(18px) saturate(70%) brightness(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(70%) brightness(1.15);
+  border-bottom: 1px solid rgba(77, 46, 145, 0.12);
+}
+
+/* The hero shouldn't sit edge-to-edge as a colored band — it's a card now */
+:root[data-theme="fujocoded"] .hero {
+  margin: var(--space-2xl) auto;
+  max-width: calc(var(--content-width) - 2 * var(--space-lg));
+  border-radius: 12px;
+  box-shadow:
+    0 10px 22px rgba(77, 46, 145, 0.16),
+    0 3px 8px rgba(42, 26, 76, 0.1);
+  backdrop-filter: blur(16px) saturate(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(130%);
+}
+
+/* Selection: signature pink */
+:root[data-theme="fujocoded"] ::selection {
+  background: #ff38eb;
+  color: #ffffff;
+}
+
+/* Reduced motion: skip transform on buttons */
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme="fujocoded"] {
+    --btn-primary-translate-hover: 0;
+    --btn-primary-translate-active: 0;
+  }
+}
