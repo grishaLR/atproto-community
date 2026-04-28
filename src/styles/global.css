@@ -236,7 +236,9 @@ p + p {
   transition:
     background 0.15s ease,
     color 0.15s ease,
-    border-color 0.15s ease;
+    border-color 0.15s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
   text-decoration: none;
 }
 
@@ -247,10 +249,17 @@ p + p {
     var(--btn-primary-border-color);
   text-transform: var(--btn-primary-text-transform);
   animation: var(--btn-primary-animation);
+  box-shadow: var(--btn-primary-shadow);
 }
 .btn--primary:hover {
   background: var(--btn-primary-bg-hover);
   color: var(--btn-primary-fg);
+  box-shadow: var(--btn-primary-shadow-hover);
+  transform: translateY(var(--btn-primary-translate-hover));
+}
+.btn--primary:active {
+  box-shadow: var(--btn-primary-shadow-active);
+  transform: translateY(var(--btn-primary-translate-active));
 }
 
 .btn--ghost {

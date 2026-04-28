@@ -71,6 +71,11 @@
   --btn-primary-border-color: transparent;
   --btn-primary-text-transform: none;
   --btn-primary-animation: none;
+  --btn-primary-shadow: none;
+  --btn-primary-shadow-hover: none;
+  --btn-primary-shadow-active: none;
+  --btn-primary-translate-hover: 0;
+  --btn-primary-translate-active: 0;
 
   /* Hero — defaults to brand primary surface */
   --hero-bg: var(--primary);

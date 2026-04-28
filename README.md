@@ -78,7 +78,7 @@ The site supports multiple visual themes — pick one with the toggle in the hea
 
 1. **Base tokens** (e.g. `--color-primary`, `--color-base-100`) — plain colors. **Themes redefine these.**
 2. **Semantic tokens** (e.g. `--foreground`, `--card`, `--success-muted`) — composed from base. Components consume these. Theme-agnostic.
-3. **Component tokens** (e.g. `--header-bg`, `--card-radius`, `--btn-primary-animation`) — scoped knobs. Default to a semantic value; **themes may override** for theme-specific patterns.
+3. **Component tokens** (e.g. `--header-bg`, `--card-radius`, `--btn-primary-shadow`) — scoped knobs. Default to a semantic value; **themes may override** for theme-specific patterns.
 
 Themes MUST NOT touch the semantic layer or the structural tokens (spacing, type scale, breakpoints, motion durations). They MAY override fonts (`--font-display`, `--font-body`) — many themes hinge on type.
 
@@ -118,6 +118,7 @@ Themes MUST NOT touch the semantic layer or the structural tokens (spacing, type
 | `horizon` | Default light — warm, breezy, blues and corals |
 | `blacksky` | Deep indigo dark mode |
 | `ngerakines` | Y2K / GeoCities — Comic Sans, ridge borders, flashing buttons |
+| `fujocoded` | Lavender→blush gradient, glass navbar, signature 3D buttons |
 
 ## Data sources
 
