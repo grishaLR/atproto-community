@@ -34,8 +34,16 @@
   --header-fg: var(--foreground);
   --header-fg-muted: var(--foreground-muted);
   --header-link: var(--primary);
-  --header-link-hover-bg: color-mix(in oklch, var(--primary) 25%, var(--background));
-  --header-link-inactive: color-mix(in oklch, var(--primary) 50%, var(--background));
+  --header-link-hover-bg: color-mix(
+    in oklch,
+    var(--primary) 25%,
+    var(--background)
+  );
+  --header-link-inactive: color-mix(
+    in oklch,
+    var(--primary) 50%,
+    var(--background)
+  );
 
   /* Footer */
   --footer-bg: var(--muted);
@@ -44,4 +52,43 @@
 
   /* Subtle separator (e.g. dot between meta items) */
   --separator-fg: var(--foreground-subtle);
+
+  /* Card shape (themes can swap radius/border style for retro looks) */
+  --card-radius: var(--radius-md);
+  --card-border-style: solid;
+  --card-border-width: 1px;
+  --card-shadow: none;
+
+  /* Pill shape — community pills, badges, the theme toggle.
+     Themes can square these (e.g. ngerakines) by setting it to 0. */
+  --pill-radius: var(--radius-pill);
+  --avatar-radius: 50%;
+
+  /* Button shape & motion (themes can override) */
+  --btn-radius: var(--radius-sm);
+  --btn-primary-border-style: none;
+  --btn-primary-border-width: 0;
+  --btn-primary-border-color: transparent;
+  --btn-primary-text-transform: none;
+  --btn-primary-animation: none;
+
+  /* Hero — defaults to brand primary surface */
+  --hero-bg: var(--primary);
+  --hero-fg: var(--primary-foreground);
+  --hero-fg-muted: color-mix(in oklch, var(--primary-foreground) 75%, transparent);
+  --hero-title: var(--primary-foreground);
+  --hero-title-shadow: none;
+  --hero-title-style: normal;
+  --hero-subtitle: var(--hero-fg-muted);
+  --hero-border-style: none;
+  --hero-border-width: 0;
+  --hero-border-color: transparent;
+  --hero-cta-bg: var(--primary-foreground);
+  --hero-cta-fg: var(--primary);
+  --hero-cta-border: none;
+  --hero-cta-animation: none;
+  --hero-cloud-display: block;
 }
+
+/* Theme-specific component overrides live alongside the
+   theme definition in src/styles/themes/<theme>.css. */

@@ -15,12 +15,12 @@ The dev server starts at `localhost:4321`. The site fetches live data from ATPro
 
 ### Commands
 
-| Command           | Action                                     |
-| :---------------- | :----------------------------------------- |
-| `npm install`     | Install dependencies                       |
-| `npm run dev`     | Start local dev server at `localhost:4321` |
-| `npm run build`   | Build production site to `./dist/`         |
-| `npm run preview` | Preview the build locally before deploying |
+| Command           | Action                                       |
+| :---------------- | :------------------------------------------- |
+| `npm install`     | Install dependencies                         |
+| `npm run dev`     | Start local dev server at `localhost:4321`    |
+| `npm run build`   | Build production site to `./dist/`           |
+| `npm run preview` | Preview the build locally before deploying   |
 
 ### Deployment
 
@@ -78,23 +78,21 @@ The site supports multiple visual themes — pick one with the toggle in the hea
 
 1. **Base tokens** (e.g. `--color-primary`, `--color-base-100`) — plain colors. **Themes redefine these.**
 2. **Semantic tokens** (e.g. `--foreground`, `--card`, `--success-muted`) — composed from base. Components consume these. Theme-agnostic.
-3. **Component tokens** (e.g. `--header-bg`, `--card-border`, `--badge-tag-bg`) — scoped knobs. Default to a semantic value; **themes may override** for theme-specific patterns.
+3. **Component tokens** (e.g. `--header-bg`, `--card-radius`, `--btn-primary-animation`) — scoped knobs. Default to a semantic value; **themes may override** for theme-specific patterns.
 
-Themes MUST NOT touch the semantic layer or the structural tokens (spacing, type scale, radii, fonts, breakpoints, motion durations).
+Themes MUST NOT touch the semantic layer or the structural tokens (spacing, type scale, breakpoints, motion durations). They MAY override fonts (`--font-display`, `--font-body`) — many themes hinge on type.
 
 ### Steps
 
 1. **Copy the template.**
-
    ```sh
    cp src/styles/themes/_template.css src/styles/themes/<your-theme>.css
    ```
-
    Replace every `REPLACE_ME` with your theme id (lowercase, no spaces — e.g. `seafoam`, `vapor-95`).
 
 2. **Fill in the base tokens.** All of them, with plain colors. Every `*-content` token must hit ≥4.5:1 contrast on its paired surface (or 3:1 for large/UI text on badges).
 
-3. **Override component tokens as needed.** The template lists every available knob, commented out — uncomment what you change, delete the rest. Common starting points: `--header-bg`, `--card-border`, `--badge-tag-bg`.
+3. **Override component tokens as needed.** The template lists every available knob, commented out — uncomment what you change, delete the rest. Common starting points: `--header-bg`, `--card-shadow`, `--hero-bg`.
 
 4. **Register the theme.** Two one-liners:
    - Add `@import "./themes/<your-theme>.css";` to `src/styles/tokens.base.css`
@@ -108,26 +106,27 @@ Themes MUST NOT touch the semantic layer or the structural tokens (spacing, type
 ### Theme rules (cheat sheet)
 
 - **Specificity:** theme blocks use `:root[data-theme="<name>"]` — that beats the `:root` defaults in the semantic and component layers regardless of import order.
-- **Dark themes:** invert the surface ramp — `--color-base-100` is the _darkest_ (page bg), and elevation lifts toward lighter shades. Lower chroma than the light equivalent.
+- **Dark themes:** invert the surface ramp — `--color-base-100` is the *darkest* (page bg), and elevation lifts toward lighter shades. Lower chroma than the light equivalent.
 - **Reduced motion:** if your theme animates anything, wrap the motion overrides in `@media (prefers-reduced-motion: reduce)` to disable them.
 - **Skip link:** if you set `position: relative` on `body > *` for a layered background, exclude `.skip-link` so it stays offscreen until focused.
 - **Lexicon-ready:** keep base tokens as plain colors (no `color-mix`, no `var()` chains). The base layer is intended to be serializable into a `community.atmosphere.theme` lexicon record someday.
 
 ### Existing themes
 
-| Id         | Mood                                            |
-| ---------- | ----------------------------------------------- |
-| `horizon`  | Default light — warm, breezy, blues and corals  |
-| `blacksky` | Deep indigo dark mode                           |
+| Id | Mood |
+|---|---|
+| `horizon` | Default light — warm, breezy, blues and corals |
+| `blacksky` | Deep indigo dark mode |
+| `ngerakines` | Y2K / GeoCities — Comic Sans, ridge borders, flashing buttons |
 
 ## Data sources
 
-| Data        | Source                                                                                                      | Fetched at |
-| ----------- | ----------------------------------------------------------------------------------------------------------- | ---------- |
-| Blog posts  | [Offprint](https://blog.atmosphere.community) via `site.standard.document` XRPC                             | Build time |
-| Events      | [Smoke Signal](https://smokesignal.events) / community accounts via `community.lexicon.calendar.event` XRPC | Build time |
-| Communities | Static YAML (`src/data/communities.yml`)                                                                    | Build time |
-| Apps        | Static YAML (`src/data/apps.yml`)                                                                           | Build time |
+| Data | Source | Fetched at |
+|------|--------|-----------|
+| Blog posts | [Offprint](https://blog.atmosphere.community) via `site.standard.document` XRPC | Build time |
+| Events | [Smoke Signal](https://smokesignal.events) / community accounts via `community.lexicon.calendar.event` XRPC | Build time |
+| Communities | Static YAML (`src/data/communities.yml`) | Build time |
+| Apps | Static YAML (`src/data/apps.yml`) | Build time |
 
 ## License
 
