@@ -22,10 +22,11 @@ steps:
         echo "DOKPLOY_WEBHOOK_URL secret is not set."
         exit 1
       fi
+      echo "kat again"
 
       curl --fail-with-body --show-error --silent \
       --request POST \
       --header "Content-Type: application/json" \
-      --header "X-Tangled-Event: push" \
+      --header "X-Github-Event: push" \
       --data "{\"ref\":\"${TANGLED_REF}\",\"after\":\"${TANGLED_SHA}\",\"repository\":{\"full_name\":\"${TANGLED_REPO_NAME}\"}}" \
       "$DOKPLOY_WEBHOOK_URL"
