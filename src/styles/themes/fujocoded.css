@@ -146,6 +146,7 @@
   backdrop-filter: blur(18px) saturate(70%) brightness(1.15);
   -webkit-backdrop-filter: blur(18px) saturate(70%) brightness(1.15);
   border-bottom: 1px solid rgba(77, 46, 145, 0.12);
+  z-index: var(--z-header) !important;
 }
 
 /* The hero shouldn't sit edge-to-edge as a colored band — it's a card now,
