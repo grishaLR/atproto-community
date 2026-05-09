@@ -114,8 +114,8 @@
   --hero-fg-muted: #424242;
   --hero-title: #0c0c0c;
   --hero-subtitle: #333333;
-  --hero-cta-bg: #c0c0c0;
-  --hero-cta-fg: #0c0c0c;
+  --hero-cta-bg: #0066cc;
+  --hero-cta-fg: #ffffff;
   --hero-cta-border: none;
   --hero-cloud-display: none;
   --hero-border-style: none;
@@ -303,36 +303,78 @@
   font-weight: 700;
 }
 
-/* Hero CTA "Subscribe" button — same 4-layer raised bevel,
-   pressed bevel on :active. */
+/* Hero CTA "Subscribe" button — AIM blue, raised bevel */
 :root[data-theme="protoim"] .btn--hero {
-  background: #c0c0c0;
-  color: #0c0c0c;
+  background: #0066cc;
+  color: #ffffff;
   border: 0;
   border-radius: 0;
   box-shadow:
-    inset -1px -1px #0a0a0a,
-    inset 1px 1px #ffffff,
-    inset -2px -2px #808080,
-    inset 2px 2px #dfdfdf;
+    inset -1px -1px #003d7a,
+    inset 1px 1px #4da6ff,
+    inset -2px -2px #005299,
+    inset 2px 2px #80c1ff;
 }
 :root[data-theme="protoim"] .btn--hero:hover {
   opacity: 1;
-  color: #0c0c0c;
-  background: #c8c8c8;
+  color: #ffffff;
+  background: #0052a3;
 }
 :root[data-theme="protoim"] .btn--hero:active {
   box-shadow:
-    inset -1px -1px #ffffff,
-    inset 1px 1px #0a0a0a,
-    inset -2px -2px #dfdfdf,
-    inset 2px 2px #808080;
+    inset -1px -1px #4da6ff,
+    inset 1px 1px #003d7a,
+    inset -2px -2px #80c1ff,
+    inset 2px 2px #005299;
+}
+
+/* "Follow on Bluesky" secondary link — AIM red (away status) */
+:root[data-theme="protoim"] .hero-secondary {
+  color: #cc0000;
+  font-weight: 600;
+}
+:root[data-theme="protoim"] .hero-secondary:hover {
+  color: #990000;
+}
+
+/* Stat numbers: blue for subscribers, red for groups */
+:root[data-theme="protoim"] .hero-stat:first-child .hero-stat__number {
+  color: #0066cc;
+}
+:root[data-theme="protoim"] .hero-stat:last-child .hero-stat__number {
+  color: #cc0000;
 }
 
 /* Selection: classic Win 98 selection blue */
 :root[data-theme="protoim"] ::selection {
   background: #0000a2;
   color: #ffffff;
+}
+
+/* Sign in button: silver bevel, sharp corners, no pill */
+:root[data-theme="protoim"] .auth-summary--login {
+  background: #c0c0c0 !important;
+  color: #0066cc !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #808080,
+    inset 2px 2px #dfdfdf !important;
+}
+:root[data-theme="protoim"] .auth-summary--login:hover,
+:root[data-theme="protoim"] .auth-menu[open] .auth-summary--login {
+  background: #c8c8c8 !important;
+  border-color: transparent !important;
+  color: #0052a3 !important;
+}
+:root[data-theme="protoim"] .auth-summary--login:active {
+  box-shadow:
+    inset -1px -1px #ffffff,
+    inset 1px 1px #0a0a0a,
+    inset -2px -2px #dfdfdf,
+    inset 2px 2px #808080 !important;
 }
 
 /* Theme switcher in protoim: silver bevel pill with sharp corners */
