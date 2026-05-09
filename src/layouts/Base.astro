@@ -119,5 +119,44 @@ const initialTheme = defaultTheme ?? null;
         }
       });
     </script>
+    <script>
+      // protoIM theme: inject a Minesweeper-flavored mystery button
+      // into the windowed <main>'s title bar. Click reveals a random
+      // glyph. Removed automatically when the theme isn't protoim.
+      (function () {
+        const POOL = ['💣', '💥', '🚩', '⛵'];
+        function sync() {
+          const isProtoim =
+            document.documentElement.dataset.theme === 'protoim';
+          const main = document.querySelector<HTMLElement>('main#main');
+          const existing =
+            document.querySelector<HTMLButtonElement>('.protoim-close');
+          if (!isProtoim || !main) {
+            existing?.remove();
+            return;
+          }
+          // Anchor on the hero's title bar if there's a hero,
+          // otherwise on main's title bar.
+          const target = main.querySelector<HTMLElement>('.hero') || main;
+          if (existing && existing.parentElement === target) return;
+          existing?.remove();
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'protoim-close';
+          btn.textContent = '?';
+          btn.setAttribute('aria-label', 'Mystery button');
+          btn.addEventListener('click', () => {
+            btn.textContent = POOL[Math.floor(Math.random() * POOL.length)];
+            btn.classList.add('is-pressed');
+          });
+          target.prepend(btn);
+        }
+        sync();
+        new MutationObserver(sync).observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['data-theme'],
+        });
+      })();
+    </script>
   </body>
 </html>

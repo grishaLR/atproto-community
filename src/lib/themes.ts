@@ -9,6 +9,7 @@ export const themes: Theme[] = [
   { id: "blacksky", name: "Blacksky", scheme: "dark" },
   { id: "ngerakines", name: "ngerakines", scheme: "light" },
   { id: "fujocoded", name: "Fujocoded", scheme: "light" },
+  { id: "protoim", name: "protoIM", scheme: "light" },
 ];
 
 export const defaultThemeId = "horizon";

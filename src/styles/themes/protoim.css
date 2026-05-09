@@ -1,0 +1,361 @@
+/* ============================================
+   Theme: protoim
+   Mood: Windows 98 / classic AIM — silver chrome,
+         3D beveled borders, gradient navy title bars,
+         sharp corners, serif headings.
+   Source: protoimsg's "AIM Classic" theme.
+            Box-shadow recipes adapted from 98.css.
+
+   Applied via <html data-theme="protoim">.
+   ============================================ */
+
+:root[data-theme="protoim"] {
+  /* --- Base tokens --- */
+  /* Surface ramp: silver chrome */
+  --color-base-100: #d6d6ce; /* main window surface (warm silver) */
+  --color-base-200: #c0c0c0; /* button face / panels */
+  --color-base-300: #a0a0a0; /* dividers / inactive borders */
+  --color-base-content: #0c0c0c;
+
+  /* Brand: AIM blue primary, navy accent, amber secondary */
+  --color-primary: #0066cc;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #f59e0b;
+  --color-secondary-content: #0c0c0c;
+
+  --color-accent: #08216b;
+  --color-accent-content: #ffffff;
+
+  --color-neutral: #333333;
+  --color-neutral-content: #d6d6ce;
+
+  /* Status — bright system-dialog colors */
+  --color-info: #0066cc;
+  --color-info-content: #ffffff;
+  --color-success: #22c55e;
+  --color-success-content: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-content: #0c0c0c;
+  --color-error: #cc0000;
+  --color-error-content: #ffffff;
+
+  /* --- Font overrides ---
+     Serif display (the proto IM login uses Times-style),
+     classic Tahoma / MS Sans Serif body. */
+  --font-display: "Times New Roman", "Times", Georgia, serif;
+  --font-body: "Tahoma", "MS Sans Serif", "Segoe UI", system-ui, sans-serif;
+
+  /* --- Pills, avatars: sharp corners everywhere --- */
+  --pill-radius: 0;
+  --avatar-radius: 0;
+
+  /* --- Card: silver bevel, no radius, no border (the bevel is the shadow) --- */
+  --card: #d6d6ce;
+  --card-radius: 0;
+  --card-border-width: 0;
+  --card-border-style: none;
+  --card-border: transparent;
+  --card-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #808080,
+    inset 2px 2px #dfdfdf;
+
+  /* --- Button: silver face, 4-layer raised bevel, pressed bevel on :active --- */
+  --btn-radius: 0;
+  --btn-primary-bg: #c0c0c0;
+  --btn-primary-bg-hover: #c8c8c8;
+  --btn-primary-fg: #0c0c0c;
+  --btn-primary-border-style: none;
+  --btn-primary-border-width: 0;
+  --btn-primary-border-color: transparent;
+  --btn-primary-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #808080,
+    inset 2px 2px #dfdfdf;
+  --btn-primary-shadow-hover:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #808080,
+    inset 2px 2px #dfdfdf;
+  --btn-primary-shadow-active:
+    inset -1px -1px #ffffff,
+    inset 1px 1px #0a0a0a,
+    inset -2px -2px #dfdfdf,
+    inset 2px 2px #808080;
+  --btn-primary-translate-hover: 0;
+  --btn-primary-translate-active: 0;
+
+  /* Ghost button: same silver bevel idea, no fill */
+  --btn-ghost-border: transparent;
+  --btn-ghost-bg-hover: #c8c8c8;
+  --btn-ghost-border-hover: transparent;
+
+  /* --- Header: gradient navy → light blue title bar with white chrome text --- */
+  --header-bg: linear-gradient(to right, #08216b, #a5c6ef);
+  --header-border: #0a0a0a;
+  --header-fg: #ffffff;
+  --header-fg-muted: rgba(255, 255, 255, 0.75);
+  --header-link: #ffffff;
+  --header-link-hover-bg: rgba(255, 255, 255, 0.18);
+  --header-link-inactive: rgba(255, 255, 255, 0.6);
+
+  /* --- Footer: silver panel --- */
+  --footer-bg: #c0c0c0;
+  --footer-border: #808080;
+  --footer-fg-muted: #333333;
+
+  /* --- Hero: silver window with a navy title bar baked in via the
+         border (top edge) — see theme-scoped styles below --- */
+  --hero-bg: #d6d6ce;
+  --hero-fg: #0c0c0c;
+  --hero-fg-muted: #424242;
+  --hero-title: #0c0c0c;
+  --hero-subtitle: #333333;
+  --hero-cta-bg: #c0c0c0;
+  --hero-cta-fg: #0c0c0c;
+  --hero-cta-border: none;
+  --hero-cloud-display: none;
+  --hero-border-style: none;
+  --hero-border-width: 0;
+  --hero-border-color: transparent;
+
+  /* --- Badges: flat silver pills with sharp corners --- */
+  --badge-tag-bg: #c0c0c0;
+  --badge-tag-fg: #08216b;
+  --badge-online-bg: #c0c0c0;
+  --badge-online-fg: #006600;
+  --badge-location-bg: #c0c0c0;
+  --badge-location-fg: #08216b;
+}
+
+/* --- Body: classic Win 98 desktop teal --- */
+:root[data-theme="protoim"] body {
+  background: #008080;
+  background-attachment: fixed;
+}
+
+/* Wrap non-hero pages' content in a silver "window" so text isn't
+   floating on the teal desktop. The home page already has the hero
+   acting as its own window, so it's deliberately skipped here.
+   Inside the silver chrome sits a sunken white IM-message panel
+   (the ::after pseudo) — content sits on top of it. */
+:root[data-theme="protoim"] main#main:not(:has(.hero)) {
+  position: relative;
+  background: #d6d6ce;
+  margin: var(--space-2xl) auto;
+  max-width: calc(var(--content-width) + var(--space-2xl));
+  padding: calc(40px + var(--space-xl)) calc(12px + var(--space-xl))
+    calc(12px + var(--space-xl));
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #808080,
+    inset 2px 2px #dfdfdf,
+    2px 2px 2px #424242;
+}
+
+:root[data-theme="protoim"] main#main:not(:has(.hero))::after {
+  content: "";
+  position: absolute;
+  inset: 40px 12px 12px;
+  background: #ffffff;
+  z-index: 0;
+  box-shadow:
+    inset -1px -1px #ffffff,
+    inset 1px 1px #808080,
+    inset -2px -2px #dfdfdf,
+    inset 2px 2px #0a0a0a;
+}
+
+:root[data-theme="protoim"] main#main:not(:has(.hero)) > *:not(.protoim-close) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Mystery "close" button on the title bar — Minesweeper-flavored.
+   Injected by a small script in Base.astro (only when
+   data-theme === "protoim"). Lives on either the hero's title bar
+   or main's title bar depending on the page. */
+:root[data-theme="protoim"] .protoim-close {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: #c0c0c0;
+  color: #0c0c0c;
+  border: 0;
+  border-radius: 0;
+  font-family: "Tahoma", "MS Sans Serif", system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #808080,
+    inset 2px 2px #dfdfdf;
+}
+:root[data-theme="protoim"] .protoim-close:active,
+:root[data-theme="protoim"] .protoim-close.is-pressed {
+  box-shadow:
+    inset -1px -1px #ffffff,
+    inset 1px 1px #0a0a0a,
+    inset -2px -2px #dfdfdf,
+    inset 2px 2px #808080;
+}
+:root[data-theme="protoim"] .protoim-close.is-pressed {
+  padding: 1px 0 0 1px;
+}
+
+:root[data-theme="protoim"] main#main:not(:has(.hero))::before {
+  content: "atmosphere.community";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  padding: 4px 8px;
+  background: linear-gradient(to right, #08216b, #a5c6ef);
+  color: #ffffff;
+  font-family: "Tahoma", "MS Sans Serif", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+/* Card / hero / post-card / event-card / community-pill — give them
+   the AIM raised bevel + sharp corners. The shadow tokens cover the
+   .card class; descendant components use their own scoped styles, so
+   we re-bevel them here. */
+:root[data-theme="protoim"] .post-card,
+:root[data-theme="protoim"] .event-card,
+:root[data-theme="protoim"] .community-pill {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #808080,
+    inset 2px 2px #dfdfdf;
+}
+
+/* Hero: window-with-title-bar look — fake a navy gradient bar
+   across the top with a ::before pseudo. The inner content area
+   gets its own sunken white panel (IM message window). */
+:root[data-theme="protoim"] .hero {
+  position: relative;
+  margin: var(--space-2xl) auto;
+  max-width: calc(var(--content-width) - 2 * var(--space-lg));
+  padding: calc(28px + 12px) 12px 12px;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #808080,
+    inset 2px 2px #dfdfdf,
+    2px 2px 2px #424242;
+}
+
+:root[data-theme="protoim"] .hero-content {
+  background: #ffffff;
+  max-width: none;
+  margin: 0;
+  padding: var(--space-2xl) var(--space-xl);
+  box-shadow:
+    inset -1px -1px #ffffff,
+    inset 1px 1px #808080,
+    inset -2px -2px #dfdfdf,
+    inset 2px 2px #0a0a0a;
+}
+
+/* The hero stats border was a brand-tinted line; on a white panel
+   the silver gray reads cleaner. */
+:root[data-theme="protoim"] .hero-stats {
+  border-top-color: #a0a0a0;
+}
+:root[data-theme="protoim"] .hero::before {
+  content: "atmosphere.community";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  padding: 4px 8px;
+  background: linear-gradient(to right, #08216b, #a5c6ef);
+  color: #ffffff;
+  font-family: "Tahoma", "MS Sans Serif", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+/* Hero title in serif with no balance gymnastics */
+:root[data-theme="protoim"] .hero h1 {
+  font-family: "Times New Roman", "Times", Georgia, serif;
+  font-weight: 700;
+}
+
+/* Hero CTA "Subscribe" button — same 4-layer raised bevel,
+   pressed bevel on :active. */
+:root[data-theme="protoim"] .btn--hero {
+  background: #c0c0c0;
+  color: #0c0c0c;
+  border: 0;
+  border-radius: 0;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #808080,
+    inset 2px 2px #dfdfdf;
+}
+:root[data-theme="protoim"] .btn--hero:hover {
+  opacity: 1;
+  color: #0c0c0c;
+  background: #c8c8c8;
+}
+:root[data-theme="protoim"] .btn--hero:active {
+  box-shadow:
+    inset -1px -1px #ffffff,
+    inset 1px 1px #0a0a0a,
+    inset -2px -2px #dfdfdf,
+    inset 2px 2px #808080;
+}
+
+/* Selection: classic Win 98 selection blue */
+:root[data-theme="protoim"] ::selection {
+  background: #0000a2;
+  color: #ffffff;
+}
+
+/* Theme switcher in protoim: silver bevel pill with sharp corners */
+:root[data-theme="protoim"] .theme-toggle {
+  background: #c0c0c0;
+  color: #0c0c0c;
+  border: 0;
+  border-radius: 0;
+  box-shadow:
+    inset -1px -1px #0a0a0a,
+    inset 1px 1px #ffffff,
+    inset -2px -2px #808080,
+    inset 2px 2px #dfdfdf;
+}
+:root[data-theme="protoim"] .theme-toggle:hover {
+  color: #0c0c0c;
+  background: #c8c8c8;
+  border-color: transparent;
+}
+:root[data-theme="protoim"] .theme-toggle:active {
+  box-shadow:
+    inset -1px -1px #ffffff,
+    inset 1px 1px #0a0a0a,
+    inset -2px -2px #dfdfdf,
+    inset 2px 2px #808080;
+}
