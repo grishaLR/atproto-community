@@ -69,7 +69,8 @@ const themeLabels = Object.fromEntries(themes.map(t => [t.id, t.name]));
     sync();
 
     menu.querySelectorAll<HTMLButtonElement>('[data-theme-option]').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
         const next = btn.dataset.themeOption!;
         if (next === fallback) {
           document.documentElement.removeAttribute('data-theme');
@@ -78,13 +79,13 @@ const themeLabels = Object.fromEntries(themes.map(t => [t.id, t.name]));
         }
         try { localStorage.setItem(key, next); } catch { /* ignore */ }
         sync();
-        menu.removeAttribute('open');
+        menu.open = false;
       });
     });
 
     // Close on outside click
-    document.addEventListener('click', e => {
-      if (!menu.contains(e.target as Node)) menu.removeAttribute('open');
+    document.addEventListener('mousedown', e => {
+      if (menu.open && !menu.contains(e.target as Node)) menu.open = false;
     });
   }
 </script>
