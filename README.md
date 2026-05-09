@@ -119,6 +119,7 @@ Themes MUST NOT touch the semantic layer or the structural tokens (spacing, type
 | `blacksky` | Deep indigo dark mode |
 | `ngerakines` | Y2K / GeoCities — Comic Sans, ridge borders, flashing buttons |
 | `fujocoded` | Lavender→blush gradient, glass navbar, signature 3D buttons |
+| `protoim`    | Windows 98 / classic AIM — silver chrome, beveled buttons, gradient navy title bar |
 
 ## Data sources
 
