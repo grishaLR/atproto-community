@@ -44,7 +44,7 @@
   );
 
   /* Borders / interactive */
-  --border: var(--color-base-300);
+  --border-color: var(--color-base-300);
   --input: var(--color-base-300);
   --ring: var(--color-primary);
 
