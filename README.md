@@ -70,6 +70,55 @@ Edit `src/data/communities.yml` and add an entry:
 
 Community accounts are also used to fetch events — any `community.lexicon.calendar.event` records on the account's PDS will automatically appear on the Events page and homepage.
 
+## Contributing a theme
+
+The site supports multiple visual themes — pick one with the toggle in the header. Each theme is a single CSS file under `src/styles/themes/`. Adding one is a 3-touchpoint job.
+
+### How theming is layered
+
+1. **Base tokens** (e.g. `--color-primary`, `--color-base-100`) — plain colors. **Themes redefine these.**
+2. **Semantic tokens** (e.g. `--foreground`, `--card`, `--success-muted`) — composed from base. Components consume these. Theme-agnostic.
+3. **Component tokens** (e.g. `--header-bg`, `--card-radius`, `--btn-primary-animation`) — scoped knobs. Default to a semantic value; **themes may override** for theme-specific patterns.
+
+Themes MUST NOT touch the semantic layer or the structural tokens (spacing, type scale, breakpoints, motion durations). They MAY override fonts (`--font-display`, `--font-body`) — many themes hinge on type.
+
+### Steps
+
+1. **Copy the template.**
+   ```sh
+   cp src/styles/themes/_template.css src/styles/themes/<your-theme>.css
+   ```
+   Replace every `REPLACE_ME` with your theme id (lowercase, no spaces — e.g. `seafoam`, `vapor-95`).
+
+2. **Fill in the base tokens.** All of them, with plain colors. Every `*-content` token must hit ≥4.5:1 contrast on its paired surface (or 3:1 for large/UI text on badges).
+
+3. **Override component tokens as needed.** The template lists every available knob, commented out — uncomment what you change, delete the rest. Common starting points: `--header-bg`, `--card-shadow`, `--hero-bg`.
+
+4. **Register the theme.** Two one-liners:
+   - Add `@import "./themes/<your-theme>.css";` to `src/styles/tokens.base.css`
+   - Add an entry to the `themes` array in `src/lib/themes.ts`:
+     ```ts
+     { id: '<your-theme>', name: '<Display Name>', scheme: 'light' | 'dark' }
+     ```
+
+5. **Test it.** `npm run dev`, cycle to your theme via the header toggle, click around every page. Verify card hovers, button states, badges, the hero, and the mobile hamburger.
+
+### Theme rules (cheat sheet)
+
+- **Specificity:** theme blocks use `:root[data-theme="<name>"]` — that beats the `:root` defaults in the semantic and component layers regardless of import order.
+- **Dark themes:** invert the surface ramp — `--color-base-100` is the *darkest* (page bg), and elevation lifts toward lighter shades. Lower chroma than the light equivalent.
+- **Reduced motion:** if your theme animates anything, wrap the motion overrides in `@media (prefers-reduced-motion: reduce)` to disable them.
+- **Skip link:** if you set `position: relative` on `body > *` for a layered background, exclude `.skip-link` so it stays offscreen until focused.
+- **Lexicon-ready:** keep base tokens as plain colors (no `color-mix`, no `var()` chains). The base layer is intended to be serializable into a `community.atmosphere.theme` lexicon record someday.
+
+### Existing themes
+
+| Id | Mood |
+|---|---|
+| `horizon` | Default light — warm, breezy, blues and corals |
+| `blacksky` | Deep indigo dark mode |
+| `ngerakines` | Y2K / GeoCities — Comic Sans, ridge borders, flashing buttons |
+
 ## Data sources
 
 | Data | Source | Fetched at |
