@@ -47,7 +47,8 @@ const { subscriberCount = 1000, groupCount = 10 } = Astro.props;
   .hero {
     position: relative;
     overflow: hidden;
-    background: var(--primary);
+    background: var(--hero-bg);
+    border: var(--hero-border-width) var(--hero-border-style) var(--hero-border-color);
     padding-block: var(--space-3xl) var(--space-3xl);
   }
 
@@ -62,6 +63,7 @@ const { subscriberCount = 1000, groupCount = 10 } = Astro.props;
     position: absolute;
     inset: 0;
     pointer-events: none;
+    display: var(--hero-cloud-display);
   }
 
   .cloud {
@@ -141,12 +143,14 @@ const { subscriberCount = 1000, groupCount = 10 } = Astro.props;
   }
 
   .hero h1 {
-    color: var(--primary-foreground);
+    color: var(--hero-title);
+    text-shadow: var(--hero-title-shadow);
+    font-style: var(--hero-title-style);
     max-width: 28ch;
   }
 
   .hero-sub {
-    color: oklch(100% 0 0 / 0.75);
+    color: var(--hero-subtitle);
     font-size: var(--text-base);
     max-width: 50ch;
     margin-top: var(--space-md);
@@ -162,29 +166,34 @@ const { subscriberCount = 1000, groupCount = 10 } = Astro.props;
   }
 
   .btn--hero {
-    background: var(--primary-foreground);
-    color: var(--primary);
+    background: var(--hero-cta-bg);
+    color: var(--hero-cta-fg);
+    border: var(--hero-cta-border);
     padding: var(--space-md) var(--space-lg);
-    border-radius: var(--radius-sm);
+    border-radius: var(--btn-radius);
     font-family: var(--font-body);
     font-size: var(--text-sm);
     font-weight: 600;
     text-decoration: none;
+    text-transform: var(--btn-primary-text-transform);
     transition: opacity 0.15s ease;
+    animation: var(--hero-cta-animation);
   }
   .btn--hero:hover {
     opacity: 0.9;
-    color: var(--primary);
+    color: var(--hero-cta-fg);
   }
 
   .hero-secondary {
-    color: oklch(100% 0 0 / 0.85);
+    color: var(--hero-fg);
     font-size: var(--text-sm);
     font-weight: 500;
     text-decoration: none;
+    opacity: 0.85;
   }
   .hero-secondary:hover {
-    color: var(--primary-foreground);
+    color: var(--hero-fg);
+    opacity: 1;
   }
 
   .hero-stats {
@@ -192,7 +201,7 @@ const { subscriberCount = 1000, groupCount = 10 } = Astro.props;
     gap: var(--space-2xl);
     margin-top: var(--space-2xl);
     padding-top: var(--space-lg);
-    border-top: 1px solid oklch(100% 0 0 / 0.12);
+    border-top: 1px solid color-mix(in oklch, var(--hero-fg) 15%, transparent);
   }
 
   .hero-stat__number {
@@ -200,14 +209,14 @@ const { subscriberCount = 1000, groupCount = 10 } = Astro.props;
     font-family: var(--font-body);
     font-weight: 700;
     font-size: var(--text-xl);
-    color: var(--primary-foreground);
+    color: var(--hero-fg);
   }
 
   .hero-stat__label {
     font-size: var(--text-xs);
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: oklch(100% 0 0 / 0.55);
+    color: var(--hero-fg-muted);
     font-weight: 600;
   }
 
